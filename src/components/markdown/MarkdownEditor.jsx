@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
-import { StyledTextArea } from "./styles/Textarea.styles";
+import { StyledTextArea } from "./styles/MarkdownEditor.styles";
 
-const Textarea = ({ textareaHandler, className, placeholder }) => (
+const MarkdownEditor = ({ textareaHandler, className, placeholder }) => (
   <StyledTextArea
     placeholder={placeholder}
     className={className}
@@ -11,16 +11,16 @@ const Textarea = ({ textareaHandler, className, placeholder }) => (
   />
 );
 
-Textarea.propTypes = {
+MarkdownEditor.propTypes = {
   textareaHandler: PropTypes.func,
   className: PropTypes.string,
   placeholder: PropTypes.string,
 };
 
-Textarea.defaultProps = {
+MarkdownEditor.defaultProps = {
   textareaHandler: noop,
   className: "",
   placeholder: "Add some markdown over here",
 };
 
-export default Textarea;
+export default MarkdownEditor;
