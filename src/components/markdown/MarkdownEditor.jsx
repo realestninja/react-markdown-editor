@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
+
 import { StyledTextArea } from "./styles/MarkdownEditor.styles";
 
 const MarkdownEditor = ({ textareaHandler, className, placeholder }) => (
