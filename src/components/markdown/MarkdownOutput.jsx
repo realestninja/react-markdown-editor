@@ -1,19 +1,24 @@
+import ReactMarkdown from "react-markdown";
 import React from "react";
 import PropTypes from "prop-types";
 
 import { Output } from "./styles/MarkdownOutput.styles";
 
-const MarkdownOutput = ({ children, className }) => (
-  <Output className={className}>{children}</Output>
+const MarkdownOutput = ({ rawContent, className }) => (
+  <Output className={className}>
+    <ReactMarkdown>
+      {rawContent}
+    </ReactMarkdown>
+  </Output>
 );
 
 MarkdownOutput.propTypes = {
-  children: PropTypes.any,
+  rawContent: PropTypes.string,
   className: PropTypes.string,
 };
 
 MarkdownOutput.defaultProps = {
-  children: null,
+  rawContent: null,
   className: "",
 };
 
