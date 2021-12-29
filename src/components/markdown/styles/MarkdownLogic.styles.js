@@ -23,6 +23,10 @@ export const Row = styled.div`
 
 export const ButtonRow = styled.div`
   margin-bottom: 15px;
+
+  > * {
+    margin-right: 10px;
+  }
 `;
 
 export const StyledMarkdownEditor = styled(MarkdownEditor)`
