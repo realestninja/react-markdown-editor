@@ -6,10 +6,10 @@ import MarkdownEditor from "./MarkdownEditor";
 import FileReader from "../form/FileReader";
 import { Wrapper, Row, ButtonRow } from "./styles/MarkdownLogic.styles";
 
+const nhm = new NodeHtmlMarkdown();
+
 const MarkdownLogic = () => {
   const [editorContent, updateContent] = useState("");
-
-  const nhm = new NodeHtmlMarkdown();
 
   const handleNewHtml = (html) => {
     updateContent(nhm.translate(html));
