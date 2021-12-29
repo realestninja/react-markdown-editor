@@ -1,4 +1,10 @@
 import styled, { css } from "styled-components";
+import MarkdownEditor from "../MarkdownEditor";
+import MarkdownOutput from "../MarkdownOutput";
+
+const maxHeight = css`
+  max-height: 80vh;
+`;
 
 export const Wrapper = styled.div`
 `;
@@ -17,4 +23,12 @@ export const Row = styled.div`
 
 export const ButtonRow = styled.div`
   margin-bottom: 15px;
+`;
+
+export const StyledMarkdownEditor = styled(MarkdownEditor)`
+  ${maxHeight}
+`;
+
+export const StyledMarkdownOutput = styled(MarkdownOutput)`
+  ${maxHeight}
 `;

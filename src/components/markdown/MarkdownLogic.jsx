@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { NodeHtmlMarkdown } from "node-html-markdown";
 
-import MarkdownOutput from "./MarkdownOutput";
-import MarkdownEditor from "./MarkdownEditor";
 import FileReader from "../form/FileReader";
-import { Wrapper, Row, ButtonRow } from "./styles/MarkdownLogic.styles";
+import { Wrapper, Row, ButtonRow, StyledMarkdownEditor, StyledMarkdownOutput } from "./styles/MarkdownLogic.styles";
 
 const nhm = new NodeHtmlMarkdown();
 
@@ -22,8 +20,8 @@ const MarkdownLogic = () => {
         <FileReader callback={updateContent} allowedFileType="markdown" wording="Import Markdown from file" />
       </ButtonRow>
       <Row>
-        <MarkdownEditor textareaHandler={updateContent} content={editorContent} />
-        <MarkdownOutput rawContent={editorContent} />
+        <StyledMarkdownEditor textareaHandler={updateContent} content={editorContent} />
+        <StyledMarkdownOutput rawContent={editorContent} />
       </Row>
     </Wrapper>
   );
