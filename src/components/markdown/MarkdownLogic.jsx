@@ -6,17 +6,19 @@ import MarkdownEditor from "./MarkdownEditor";
 
 const MarkdownLogic = () => {
   const [editorContent, updateContent] = useState("");
-  /*
-   * const [htmlContent, setHtmlContent] = useState("");
-   */
 
   const nhm = new NodeHtmlMarkdown();
+
   const dummyHtml = "<p>hello world<a class=\"image-popup\" href=\"https://nikhil.realest.ninja/hello.jpg\">hi</a></p>";
-  console.log("nhm:", nhm.translate(dummyHtml));
+
+  const handleNewHtml = () => {
+    updateContent(nhm.translate(dummyHtml));
+  };
 
   return (
     <>
-      <MarkdownEditor textareaHandler={updateContent} />
+      <button type="button" onClick={handleNewHtml}>test</button>
+      <MarkdownEditor textareaHandler={updateContent} content={editorContent} />
       <MarkdownOutput rawContent={editorContent} />
     </>
   );
