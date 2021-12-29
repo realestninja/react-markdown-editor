@@ -3,21 +3,21 @@ import { NodeHtmlMarkdown } from "node-html-markdown";
 
 import MarkdownOutput from "./MarkdownOutput";
 import MarkdownEditor from "./MarkdownEditor";
+import FileReader from "../form/FileReader";
 
 const MarkdownLogic = () => {
   const [editorContent, updateContent] = useState("");
 
   const nhm = new NodeHtmlMarkdown();
 
-  const dummyHtml = "<p>hello world<a class=\"image-popup\" href=\"https://nikhil.realest.ninja/hello.jpg\">hi</a></p>";
-
-  const handleNewHtml = () => {
-    updateContent(nhm.translate(dummyHtml));
+  const handleNewHtml = (html) => {
+    updateContent(nhm.translate(html));
   };
 
   return (
     <>
-      <button type="button" onClick={handleNewHtml}>test</button>
+      <FileReader callback={handleNewHtml} allowedFileType="html" />
+      <FileReader callback={updateContent} allowedFileType="markdown" />
       <MarkdownEditor textareaHandler={updateContent} content={editorContent} />
       <MarkdownOutput rawContent={editorContent} />
     </>
