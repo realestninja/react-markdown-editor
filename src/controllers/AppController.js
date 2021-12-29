@@ -1,17 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import MarkdownLogic from "../components/markdown/MarkdownLogic";
 
-import MarkdownOutput from "../components/markdown/MarkdownOutput";
-import MarkdownEditor from "../components/markdown/MarkdownEditor";
-
-const AppController = () => {
-  const [editorContent, updateContent] = useState("");
-
-  return (
-    <>
-      <MarkdownEditor textareaHandler={updateContent} />
-      <MarkdownOutput rawContent={editorContent} />
-    </>
-  );
-};
+const AppController = () => (
+  <MarkdownLogic />
+);
 
 export default AppController;
