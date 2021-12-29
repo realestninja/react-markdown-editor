@@ -33,7 +33,7 @@ module.exports = {
     "max-len": ["error", { code: 120 }],
     "arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
     "no-param-reassign": "off",
-    "no-unused-vars": ["error", { args: "none", ignoreRestSiblings: true }],
+    "no-unused-vars": ["warn", { args: "none", ignoreRestSiblings: true }],
     "object-curly-newline": ["error", { consistent: true }],
     quotes: ["error", "double"],
     "react/destructuring-assignment": "off",
@@ -59,6 +59,6 @@ module.exports = {
     "lodash/prefer-startswith": "off",
     "lodash/prefer-times": "off",
     "extra-rules/no-commented-out-code": "warn",
-    "extra-rules/potential-point-free": "warn"
+    "extra-rules/potential-point-free": "warn",
   },
 };
