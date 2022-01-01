@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { HiddenLink } from "./styles/FileSaver.styles";
+
+import { HiddenLink } from "./styles/SaveToFileButton.styles";
 import { createTimestampedFilename } from "../helper/dateHelper";
 
-const FileSaver = ({ content, wording, fileType }) => {
+const SaveToFileButton = ({ content, wording, fileType }) => {
   const linkRef = useRef();
 
   const handleSave = () => {
@@ -23,16 +24,16 @@ const FileSaver = ({ content, wording, fileType }) => {
   );
 };
 
-FileSaver.propTypes = {
+SaveToFileButton.propTypes = {
   content: PropTypes.string,
   wording: PropTypes.string,
   fileType: PropTypes.string,
 };
 
-FileSaver.defaultProps = {
+SaveToFileButton.defaultProps = {
   content: "",
   wording: "Save to file",
   fileType: null,
 };
 
-export default FileSaver;
+export default SaveToFileButton;

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
 
-import { HiddenInput } from "./styles/FileReader.styles";
+import { HiddenInput } from "./styles/ReadFromFileButton.styles";
 
 const allowances = {
   markdown: ".md",
@@ -10,7 +10,7 @@ const allowances = {
   default: null,
 };
 
-const FileReader = ({ callback, allowedFileType, wording, className }) => {
+const ReadFromFileButton = ({ callback, allowedFileType, wording, className }) => {
   const inputRef = useRef();
 
   const handleFile = async (val) => {
@@ -38,18 +38,18 @@ const FileReader = ({ callback, allowedFileType, wording, className }) => {
   );
 };
 
-FileReader.propTypes = {
+ReadFromFileButton.propTypes = {
   allowedFileType: PropTypes.string,
   callback: PropTypes.func,
   wording: PropTypes.string,
   className: PropTypes.string,
 };
 
-FileReader.defaultProps = {
+ReadFromFileButton.defaultProps = {
   allowedFileType: "default",
   callback: noop,
   wording: "Choose file",
   className: null,
 };
 
-export default FileReader;
+export default ReadFromFileButton;
