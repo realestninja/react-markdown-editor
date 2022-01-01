@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { NodeHtmlMarkdown } from "node-html-markdown";
 import showdown from "showdown";
 
@@ -9,8 +10,8 @@ import { Wrapper, Row, ButtonRow, StyledMarkdownEditor, StyledMarkdownOutput } f
 const converterHtmlToMarkdown = new NodeHtmlMarkdown();
 const converterMarkdownToHtml = new showdown.Converter();
 
-const MarkdownLogic = () => {
-  const [editorMdContent, updateContent] = useState("");
+const MarkdownLogic = ({ customImportButtons }) => {
+  const [editorMdContent, setEditorMdContent] = useState("");
   const [editorHtmlContent, setEditorHtmlContent] = useState("");
 
   useEffect(() => {
@@ -18,23 +19,49 @@ const MarkdownLogic = () => {
   }, [editorMdContent]);
 
   const handleNewHtml = (html) => {
-    updateContent(converterHtmlToMarkdown.translate(html));
+    setEditorMdContent(converterHtmlToMarkdown.translate(html));
   };
 
   return (
     <Wrapper>
       <ButtonRow>
-        <ReadFromFileButton callback={handleNewHtml} allowedFileType="html" wording="Import HTML from file" />
-        <ReadFromFileButton callback={updateContent} allowedFileType="markdown" wording="Import Markdown from file" />
+        <ReadFromFileButton
+          callback={handleNewHtml}
+          allowedFileType="html"
+          wording="Import HTML from file"
+        />
+        <ReadFromFileButton
+          callback={setEditorMdContent}
+          allowedFileType="markdown"
+          wording="Import Markdown from file"
+        />
+
+        {
+          customImportButtons.map(buttonProps => (
+            <ReadFromFileButton
+              callback={handleNewHtml}
+              {...buttonProps}
+            />
+          ))
+        }
+
         <SaveToFileButton content={editorMdContent} fileType="md" wording="Save markdown to file" />
         <SaveToFileButton content={editorHtmlContent} fileType="html" wording="Save HTML to file" />
       </ButtonRow>
       <Row>
-        <StyledMarkdownEditor textareaHandler={updateContent} content={editorMdContent} />
+        <StyledMarkdownEditor textareaHandler={setEditorMdContent} content={editorMdContent} />
         <StyledMarkdownOutput rawContent={editorMdContent} />
       </Row>
     </Wrapper>
   );
+};
+
+MarkdownLogic.propTypes = {
+  customImportButtons: PropTypes.array,
+};
+
+MarkdownLogic.defaultProps = {
+  customImportButtons: [],
 };
 
 export default MarkdownLogic;

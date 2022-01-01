@@ -10,11 +10,15 @@ const allowances = {
   default: null,
 };
 
-const ReadFromFileButton = ({ callback, allowedFileType, wording, className }) => {
+const ReadFromFileButton = ({ callback, allowedFileType, wording, className, customFileContentHandler }) => {
   const inputRef = useRef();
 
   const handleFile = async (val) => {
-    const fileContent = await val.text();
+    let fileContent = await val.text();
+
+    if (customFileContentHandler !== noop) fileContent = customFileContentHandler(fileContent);
+    console.log("fileContent:", fileContent);
+
     callback(fileContent);
     inputRef.current.value = null;
   };
@@ -43,6 +47,7 @@ ReadFromFileButton.propTypes = {
   callback: PropTypes.func,
   wording: PropTypes.string,
   className: PropTypes.string,
+  customFileContentHandler: PropTypes.func,
 };
 
 ReadFromFileButton.defaultProps = {
@@ -50,6 +55,7 @@ ReadFromFileButton.defaultProps = {
   callback: noop,
   wording: "Choose file",
   className: null,
+  customFileContentHandler: noop,
 };
 
 export default ReadFromFileButton;
