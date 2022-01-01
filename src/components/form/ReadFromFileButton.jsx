@@ -17,7 +17,6 @@ const ReadFromFileButton = ({ callback, allowedFileType, wording, className, cus
     let fileContent = await val.text();
 
     if (customFileContentHandler !== noop) fileContent = customFileContentHandler(fileContent);
-    console.log("fileContent:", fileContent);
 
     callback(fileContent);
     inputRef.current.value = null;
