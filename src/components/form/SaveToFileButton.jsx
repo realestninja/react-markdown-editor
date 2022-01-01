@@ -21,7 +21,7 @@ const SaveToFileButton = ({ content, wording, fileType }) => {
   return (
     <>
       <button type="button" onClick={handleSave}>{wording}</button>
-      <HiddenLink ref={linkRef}>Download</HiddenLink>
+      <HiddenLink ref={linkRef} />
     </>
   );
 };
