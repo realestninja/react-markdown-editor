@@ -1,6 +1,6 @@
-import ReactMarkdown from "react-markdown";
 import React from "react";
 import PropTypes from "prop-types";
+import ReactMarkdown from "react-markdown";
 
 import { Output } from "./styles/MarkdownOutput.styles";
 
