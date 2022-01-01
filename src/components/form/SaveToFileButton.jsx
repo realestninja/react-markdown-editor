@@ -14,6 +14,8 @@ const SaveToFileButton = ({ content, wording, fileType }) => {
     linkRef.current.download = `${createTimestampedFilename()}${fileType ? `.${fileType}` : ""}`;
     linkRef.current.href = href;
     linkRef.current.click();
+    linkRef.current.removeAttribute("download");
+    linkRef.current.href = "#";
   };
 
   return (
