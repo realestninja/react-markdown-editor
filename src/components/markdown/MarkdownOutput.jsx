@@ -1,24 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import ReactMarkdown from "react-markdown";
 
 import { Output } from "./styles/MarkdownOutput.styles";
 
-const MarkdownOutput = ({ rawContent, className }) => (
-  <Output className={className}>
-    <ReactMarkdown>
-      {rawContent}
-    </ReactMarkdown>
-  </Output>
+const MarkdownOutput = ({ htmlContent, className }) => (
+  <Output className={className} dangerouslySetInnerHTML={{ __html: htmlContent }} />
 );
 
 MarkdownOutput.propTypes = {
-  rawContent: PropTypes.string,
+  htmlContent: PropTypes.string,
   className: PropTypes.string,
 };
 
 MarkdownOutput.defaultProps = {
-  rawContent: null,
+  htmlContent: null,
   className: "",
 };
 

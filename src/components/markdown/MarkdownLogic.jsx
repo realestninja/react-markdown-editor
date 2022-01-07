@@ -50,7 +50,7 @@ const MarkdownLogic = ({ customImportButtons }) => {
       </ButtonRow>
       <Row>
         <StyledMarkdownEditor textareaHandler={setEditorMdContent} content={editorMdContent} />
-        <StyledMarkdownOutput rawContent={editorMdContent} />
+        <StyledMarkdownOutput htmlContent={editorHtmlContent} />
       </Row>
     </Wrapper>
   );
