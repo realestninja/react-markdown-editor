@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { NodeHtmlMarkdown } from "node-html-markdown";
-import showdown from "showdown";
+import MarkdownIt from "markdown-it";
+import MarkdownItContainer from "markdown-it-container";
 
 import ReadFromFileButton from "../form/ReadFromFileButton";
 import SaveToFileButton from "../form/SaveToFileButton";
 import { Wrapper, Row, ButtonRow, StyledMarkdownEditor, StyledMarkdownOutput } from "./styles/MarkdownLogic.styles";
 
 const converterHtmlToMarkdown = new NodeHtmlMarkdown();
-const converterMarkdownToHtml = new showdown.Converter();
+const converterMarkdownToHtml = new MarkdownIt()
 
 const MarkdownLogic = ({ customImportButtons }) => {
   const [editorMdContent, setEditorMdContent] = useState("");
   const [editorHtmlContent, setEditorHtmlContent] = useState("");
 
   useEffect(() => {
-    setEditorHtmlContent(converterMarkdownToHtml.makeHtml(editorMdContent));
+    setEditorHtmlContent(converterMarkdownToHtml.render(editorMdContent));
   }, [editorMdContent]);
 
   const handleNewHtml = (html) => {
