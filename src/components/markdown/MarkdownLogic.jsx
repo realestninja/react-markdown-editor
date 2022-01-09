@@ -9,11 +9,15 @@ import SaveToFileButton from "../form/SaveToFileButton";
 import { Wrapper, Row, ButtonRow, StyledMarkdownEditor, StyledMarkdownOutput } from "./styles/MarkdownLogic.styles";
 
 const converterHtmlToMarkdown = new NodeHtmlMarkdown();
-const converterMarkdownToHtml = new MarkdownIt()
+const converterMarkdownToHtml = new MarkdownIt();
 
-const MarkdownLogic = ({ customImportButtons }) => {
+const MarkdownLogic = ({ customImportButtons, customMarkdownSetup }) => {
   const [editorMdContent, setEditorMdContent] = useState("");
   const [editorHtmlContent, setEditorHtmlContent] = useState("");
+
+  customMarkdownSetup.forEach((object, index) => {
+    converterMarkdownToHtml.use(MarkdownItContainer, `customFunc-${index}`, object);
+  });
 
   useEffect(() => {
     setEditorHtmlContent(converterMarkdownToHtml.render(editorMdContent));
@@ -59,10 +63,12 @@ const MarkdownLogic = ({ customImportButtons }) => {
 
 MarkdownLogic.propTypes = {
   customImportButtons: PropTypes.array,
+  customMarkdownSetup: PropTypes.array,
 };
 
 MarkdownLogic.defaultProps = {
   customImportButtons: [],
+  customMarkdownSetup: [],
 };
 
 export default MarkdownLogic;
