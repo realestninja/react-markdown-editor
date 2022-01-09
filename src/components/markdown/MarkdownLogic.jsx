@@ -1,31 +1,30 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { NodeHtmlMarkdown } from "node-html-markdown";
+
 import MarkdownIt from "markdown-it";
 import MarkdownItContainer from "markdown-it-container";
+import { NodeHtmlMarkdown } from "node-html-markdown";
 
 import ReadFromFileButton from "../form/ReadFromFileButton";
 import SaveToFileButton from "../form/SaveToFileButton";
 import { Wrapper, Row, ButtonRow, StyledMarkdownEditor, StyledMarkdownOutput } from "./styles/MarkdownLogic.styles";
 
-const converterHtmlToMarkdown = new NodeHtmlMarkdown();
-const converterMarkdownToHtml = new MarkdownIt();
+const htmlToMarkdownConverter = new NodeHtmlMarkdown();
+const markdownToHtmlConverter = new MarkdownIt();
 
-const MarkdownLogic = ({ customImportButtons, customMarkdownSetup }) => {
+const MarkdownLogic = ({ customImportButtons, customMarkdown }) => {
   const [editorMdContent, setEditorMdContent] = useState("");
   const [editorHtmlContent, setEditorHtmlContent] = useState("");
 
-  customMarkdownSetup.forEach((object, index) => {
-    converterMarkdownToHtml.use(MarkdownItContainer, `customFunc-${index}`, object);
+  customMarkdown.forEach((object, index) => {
+    markdownToHtmlConverter.use(MarkdownItContainer, `customFunc-${index}`, object);
   });
 
   useEffect(() => {
-    setEditorHtmlContent(converterMarkdownToHtml.render(editorMdContent));
+    setEditorHtmlContent(markdownToHtmlConverter.render(editorMdContent));
   }, [editorMdContent]);
 
-  const handleNewHtml = (html) => {
-    setEditorMdContent(converterHtmlToMarkdown.translate(html));
-  };
+  const handleNewHtml = html => setEditorMdContent(htmlToMarkdownConverter.translate(html));
 
   return (
     <Wrapper>
@@ -63,12 +62,12 @@ const MarkdownLogic = ({ customImportButtons, customMarkdownSetup }) => {
 
 MarkdownLogic.propTypes = {
   customImportButtons: PropTypes.array,
-  customMarkdownSetup: PropTypes.array,
+  customMarkdown: PropTypes.array,
 };
 
 MarkdownLogic.defaultProps = {
   customImportButtons: [],
-  customMarkdownSetup: [],
+  customMarkdown: [],
 };
 
 export default MarkdownLogic;
