@@ -5,9 +5,13 @@ import MarkdownIt from "markdown-it";
 import MarkdownItContainer from "markdown-it-container";
 import { NodeHtmlMarkdown } from "node-html-markdown";
 
-import ReadFromFileButton from "../form/ReadFromFileButton";
-import SaveToFileButton from "../form/SaveToFileButton";
-import { Wrapper, Row, ButtonRow, StyledMarkdownEditor, StyledMarkdownOutput } from "./styles/MarkdownLogic.styles";
+import ButtonRow from "./ButtonRow";
+import {
+  Wrapper,
+  Row,
+  StyledMarkdownEditor,
+  StyledMarkdownOutput,
+} from "./styles/MarkdownLogic.styles";
 
 const htmlToMarkdownConverter = new NodeHtmlMarkdown();
 const markdownToHtmlConverter = new MarkdownIt();
@@ -28,30 +32,13 @@ const MarkdownLogic = ({ customImportButtons, customMarkdown }) => {
 
   return (
     <Wrapper>
-      <ButtonRow>
-        <ReadFromFileButton
-          callback={handleNewHtml}
-          allowedFileType="html"
-          wording="Import HTML from file"
-        />
-        <ReadFromFileButton
-          callback={setEditorMdContent}
-          allowedFileType="markdown"
-          wording="Import Markdown from file"
-        />
-
-        {
-          customImportButtons.map(buttonProps => (
-            <ReadFromFileButton
-              callback={handleNewHtml}
-              {...buttonProps}
-            />
-          ))
-        }
-
-        <SaveToFileButton content={editorMdContent} fileType="md" wording="Save markdown to file" />
-        <SaveToFileButton content={editorHtmlContent} fileType="html" wording="Save HTML to file" />
-      </ButtonRow>
+      <ButtonRow
+        editorMdContent={editorMdContent}
+        editorHtmlContent={editorHtmlContent}
+        handleNewHtml={handleNewHtml}
+        setEditorMdContent={setEditorMdContent}
+        customImportButtons={customImportButtons}
+      />
       <Row>
         <StyledMarkdownEditor textareaHandler={setEditorMdContent} content={editorMdContent} />
         <StyledMarkdownOutput htmlContent={editorHtmlContent} />
