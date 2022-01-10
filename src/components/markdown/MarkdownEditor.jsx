@@ -4,12 +4,19 @@ import noop from "lodash/noop";
 
 import { StyledTextArea } from "./styles/MarkdownEditor.styles";
 
-const MarkdownEditor = ({ textareaHandler, className, placeholder, content }) => (
+const MarkdownEditor = ({
+  textareaHandler,
+  className,
+  placeholder,
+  content,
+  editorRef,
+}) => (
   <StyledTextArea
     placeholder={placeholder}
     className={className}
     value={content}
-    onInput={e => textareaHandler(e.target.value)}
+    ref={editorRef}
+    onInput={e => textareaHandler(e.target)}
   />
 );
 
@@ -18,6 +25,7 @@ MarkdownEditor.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
   content: PropTypes.string,
+  editorRef: PropTypes.object,
 };
 
 MarkdownEditor.defaultProps = {
@@ -25,6 +33,7 @@ MarkdownEditor.defaultProps = {
   className: "",
   placeholder: "Add some markdown over here",
   content: null,
+  editorRef: {},
 };
 
 export default MarkdownEditor;

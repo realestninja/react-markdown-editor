@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 import MarkdownIt from "markdown-it";
@@ -19,6 +19,9 @@ const markdownToHtmlConverter = new MarkdownIt();
 const MarkdownLogic = ({ customImportButtons, customMarkdown }) => {
   const [editorMdContent, setEditorMdContent] = useState("");
   const [editorHtmlContent, setEditorHtmlContent] = useState("");
+  const [cursorPos, setCursorPos] = useState(0);
+
+  const editorRef = useRef();
 
   customMarkdown.forEach((object, index) => {
     markdownToHtmlConverter.use(MarkdownItContainer, `customFunc-${index}`, object);
@@ -29,6 +32,16 @@ const MarkdownLogic = ({ customImportButtons, customMarkdown }) => {
   }, [editorMdContent]);
 
   const handleNewHtml = html => setEditorMdContent(htmlToMarkdownConverter.translate(html));
+  const handleTextareaChange = (target) => {
+    console.log("target:", target);
+    setEditorMdContent(target.value);
+  };
+
+  const injectContent = (string) => {
+    const position = 2;
+    const newContent = editorMdContent.substring(0, position) + string + editorMdContent.substring(position);
+    setEditorMdContent(newContent);
+  };
 
   return (
     <Wrapper>
@@ -38,9 +51,16 @@ const MarkdownLogic = ({ customImportButtons, customMarkdown }) => {
         handleNewHtml={handleNewHtml}
         setEditorMdContent={setEditorMdContent}
         customImportButtons={customImportButtons}
+        addContent={injectContent}
+        editorRef={editorRef}
       />
       <Row>
-        <StyledMarkdownEditor textareaHandler={setEditorMdContent} content={editorMdContent} />
+        <StyledMarkdownEditor
+          textareaHandler={handleTextareaChange}
+          content={editorMdContent}
+          editorRef={editorRef}
+          setCursorPos={setCursorPos}
+        />
         <StyledMarkdownOutput htmlContent={editorHtmlContent} />
       </Row>
     </Wrapper>

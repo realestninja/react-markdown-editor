@@ -5,17 +5,23 @@ import noop from "lodash/noop";
 import ReadFromFileButton from "../form/ReadFromFileButton";
 import SaveToFileButton from "../form/SaveToFileButton";
 import { ButtonRowWrapper, ButtonGroup } from "./styles/ButtonRow.styles";
+import CreateMarkdownButton from "../form/CreateMarkdownButton";
 
 const ButtonRow = ({
   editorMdContent,
   editorHtmlContent,
   handleNewHtml,
   setEditorMdContent,
+  addContent,
   customImportButtons,
+  editorRef,
 }) => (
   <ButtonRowWrapper>
     <ButtonGroup>
-      <button type="button">hi</button>
+      <CreateMarkdownButton
+        addContent={addContent}
+        editorRef={editorRef}
+      />
     </ButtonGroup>
     <ButtonGroup>
       <ReadFromFileButton
@@ -49,7 +55,9 @@ ButtonRow.propTypes = {
   editorHtmlContent: PropTypes.string,
   handleNewHtml: PropTypes.func,
   setEditorMdContent: PropTypes.func,
+  addContent: PropTypes.func,
   customImportButtons: PropTypes.array,
+  editorRef: PropTypes.object,
 };
 
 ButtonRow.defaultProps = {
@@ -57,7 +65,9 @@ ButtonRow.defaultProps = {
   editorHtmlContent: "",
   handleNewHtml: noop,
   setEditorMdContent: noop,
+  addContent: noop,
   customImportButtons: [],
+  editorRef: {},
 };
 
 export default ButtonRow;
