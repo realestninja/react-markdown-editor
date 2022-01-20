@@ -23,6 +23,15 @@ const MarkdownLogic = ({ customImportButtons, customMarkdown }) => {
 
   const editorRef = useRef();
 
+  const handleEditorClick = event => setCursorPos(event.target.selectionStart);
+
+  useEffect(() => {
+    editorRef.current.addEventListener("click", (event) => {
+      handleEditorClick(event);
+    });
+    return () => editorRef.removeEventListener("click", handleEditorClick);
+  }, [editorRef]);
+
   customMarkdown.forEach((object, index) => {
     markdownToHtmlConverter.use(MarkdownItContainer, `customFunc-${index}`, object);
   });
@@ -32,13 +41,13 @@ const MarkdownLogic = ({ customImportButtons, customMarkdown }) => {
   }, [editorMdContent]);
 
   const handleNewHtml = html => setEditorMdContent(htmlToMarkdownConverter.translate(html));
-  const handleTextareaChange = (target) => {
-    console.log("target:", target);
-    setEditorMdContent(target.value);
+  const handleTextareaChange = (e) => {
+    setCursorPos(e.target.selectionStart);
+    setEditorMdContent(e.target.value);
   };
 
   const injectContent = (string) => {
-    const position = 2;
+    const position = cursorPos;
     const newContent = editorMdContent.substring(0, position) + string + editorMdContent.substring(position);
     setEditorMdContent(newContent);
   };

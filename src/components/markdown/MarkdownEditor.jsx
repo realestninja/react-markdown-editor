@@ -16,7 +16,7 @@ const MarkdownEditor = ({
     className={className}
     value={content}
     ref={editorRef}
-    onInput={e => textareaHandler(e.target)}
+    onInput={e => textareaHandler(e)}
   />
 );
 
