@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
 
+import CreateMarkdownGalleryButton from "../form/defaultButtons/CreateMarkdownGalleryButton";
 import ReadFromFileButton from "../form/ReadFromFileButton";
 import SaveToFileButton from "../form/SaveToFileButton";
 import { ButtonRowWrapper, ButtonGroup } from "./styles/ButtonRow.styles";
-import CreateMarkdownButton from "../form/CreateMarkdownButton";
 
 const ButtonRow = ({
   editorMdContent,
@@ -18,7 +18,7 @@ const ButtonRow = ({
 }) => (
   <ButtonRowWrapper>
     <ButtonGroup>
-      <CreateMarkdownButton
+      <CreateMarkdownGalleryButton
         addContent={addContent}
         editorRef={editorRef}
       />

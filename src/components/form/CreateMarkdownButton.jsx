@@ -2,26 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
 
-const dummyContent = "::: gallery";
-const CreateMarkdownButton = ({ addContent, editorRef }) => {
-  const handleClick = () => {
-    addContent(dummyContent);
-    editorRef.current.focus();
-  };
-
-  return (
-    <button type="button" onClick={handleClick}>CreateMarkdownButton</button>
-  );
-};
+const CreateMarkdownButton = ({ handleClick, wording }) => (
+  <button type="button" onClick={handleClick}>{wording}</button>
+);
 
 CreateMarkdownButton.propTypes = {
-  addContent: PropTypes.func,
-  editorRef: PropTypes.object,
+  handleClick: PropTypes.func,
+  wording: PropTypes.string,
 };
 
 CreateMarkdownButton.defaultProps = {
-  addContent: noop,
-  editorRef: {},
+  handleClick: noop,
+  wording: "",
 };
 
 export default CreateMarkdownButton;
