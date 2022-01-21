@@ -4,8 +4,8 @@ import noop from "lodash/noop";
 
 import CreateMarkdownButton from "../CreateMarkdownButton";
 
-const dummyContent = "::: gallery";
-const CreateMarkdownGalleryButton = ({ addContent, editorRef }) => {
+const dummyContent = "::: gallery\n";
+const CreateMarkdownGalleryButton = ({ addContent, editorRef, wording }) => {
   const handleClick = () => {
     addContent(dummyContent);
     editorRef.current.focus();
@@ -14,7 +14,7 @@ const CreateMarkdownGalleryButton = ({ addContent, editorRef }) => {
   return (
     <CreateMarkdownButton
       handleClick={handleClick}
-      wording="hello world"
+      wording={wording}
     />
   );
 };
@@ -22,11 +22,13 @@ const CreateMarkdownGalleryButton = ({ addContent, editorRef }) => {
 CreateMarkdownGalleryButton.propTypes = {
   addContent: PropTypes.func,
   editorRef: PropTypes.object,
+  wording: PropTypes.string,
 };
 
 CreateMarkdownGalleryButton.defaultProps = {
   addContent: noop,
   editorRef: {},
+  wording: "",
 };
 
 export default CreateMarkdownGalleryButton;

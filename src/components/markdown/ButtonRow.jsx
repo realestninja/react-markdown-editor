@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import noop from "lodash/noop";
 
-import CreateMarkdownGalleryButton from "../form/defaultButtons/CreateMarkdownGalleryButton";
+import DefaultButtons from "../form/defaultButtons/DefaultButtons";
 import ReadFromFileButton from "../form/ReadFromFileButton";
 import SaveToFileButton from "../form/SaveToFileButton";
 import { ButtonRowWrapper, ButtonGroup } from "./styles/ButtonRow.styles";
@@ -15,14 +15,15 @@ const ButtonRow = ({
   addContent,
   customImportButtons,
   editorRef,
+  defaultButtons,
 }) => (
   <ButtonRowWrapper>
-    <ButtonGroup>
-      <CreateMarkdownGalleryButton
+    {defaultButtons && (
+      <DefaultButtons
         addContent={addContent}
         editorRef={editorRef}
       />
-    </ButtonGroup>
+    )}
     <ButtonGroup>
       <ReadFromFileButton
         callback={handleNewHtml}
@@ -51,6 +52,7 @@ const ButtonRow = ({
 );
 
 ButtonRow.propTypes = {
+  defaultButtons: PropTypes.bool,
   editorMdContent: PropTypes.string,
   editorHtmlContent: PropTypes.string,
   handleNewHtml: PropTypes.func,
@@ -61,6 +63,7 @@ ButtonRow.propTypes = {
 };
 
 ButtonRow.defaultProps = {
+  defaultButtons: false,
   editorMdContent: "",
   editorHtmlContent: "",
   handleNewHtml: noop,

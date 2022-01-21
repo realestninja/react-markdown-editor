@@ -62,6 +62,7 @@ const MarkdownLogic = ({ customImportButtons, customMarkdown }) => {
         customImportButtons={customImportButtons}
         addContent={injectContent}
         editorRef={editorRef}
+        defaultButtons
       />
       <Row>
         <StyledMarkdownEditor
