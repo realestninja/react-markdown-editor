@@ -4,10 +4,9 @@ import noop from "lodash/noop";
 
 import CreateMarkdownButton from "../CreateMarkdownButton";
 
-const dummyContent = "::: gallery\n";
 const CreateMarkdownGalleryButton = ({ addContent, editorRef, wording }) => {
   const handleClick = () => {
-    addContent(dummyContent);
+    addContent("\n::: gallery\n\n:::");
     editorRef.current.focus();
   };
 
