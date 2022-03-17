@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import noop from "lodash/noop";
 
 import CreateMarkdownGalleryButton from "./CreateMarkdownGalleryButton";
+import CreatePreCodeButton from "./CreatePreCodeButton";
 import { ButtonGroup } from "../../markdown/styles/ButtonRow.styles";
 
 const DefaultButtons = ({
@@ -14,6 +15,11 @@ const DefaultButtons = ({
       addContent={addContent}
       editorRef={editorRef}
       wording="Gallery"
+    />
+    <CreatePreCodeButton
+      addContent={addContent}
+      editorRef={editorRef}
+      wording="Code"
     />
   </ButtonGroup>
 );
